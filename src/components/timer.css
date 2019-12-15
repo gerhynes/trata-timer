@@ -1,0 +1,41 @@
+.controls {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+button {
+  width: 4rem;
+  margin: 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button .primary {
+  fill: #c53030;
+}
+
+button .secondary {
+  fill: #fff;
+}
+
+.break-length,
+.session-length {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.display {
+  text-align: center;
+  margin: 2rem;
+}
+
+.timer-label {
+  font-size: 3rem;
+}
+
+.time-left {
+  font-size: 3rem;
+}
