@@ -1,3 +1,5 @@
+/* Default styles */
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -619,4 +621,15 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+/* Custom styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex-grow: 1;
 }
