@@ -39,3 +39,11 @@ button .secondary {
 .time-left {
   font-size: 3rem;
 }
+
+.timer-controls {
+  text-align: center;
+}
+
+.icon-history .secondary {
+  fill: #c53030;
+}
