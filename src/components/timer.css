@@ -5,8 +5,15 @@
   justify-content: center;
 }
 
+.break-controls-inner,
+.session-controls-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
 button {
-  width: 4rem;
+  width: 5rem;
   margin: 1rem;
   background: transparent;
   border: none;
