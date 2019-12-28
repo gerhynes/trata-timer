@@ -9,6 +9,7 @@ export default class timer extends Component {
       breakLength: 5,
       timeLeft: 1500,
       timerType: "Session",
+      timerIsRunning: false,
     };
     this.startTimer = this.startTimer.bind(this);
     this.pauseTimer = this.pauseTimer.bind(this);
@@ -18,10 +19,15 @@ export default class timer extends Component {
     this.incrementBreak = this.incrementBreak.bind(this);
     this.decrementBreak = this.decrementBreak.bind(this);
     this.setClock = this.setClock.bind(this);
+    this.setTimer = this.setTimer.bind(this);
   }
   startTimer() {
     // Clear any existing interval in case user presses start more than once
     clearInterval(this.timer);
+
+    this.setState({
+      timerIsRunning: true,
+    });
 
     this.timer = setInterval(() => {
       this.setState({
@@ -31,11 +37,15 @@ export default class timer extends Component {
   }
   pauseTimer() {
     clearInterval(this.timer);
+    this.setState({
+      timerIsRunning: false,
+    });
   }
   resetTimer() {
     clearInterval(this.timer);
     this.setState({
       timeLeft: 1500,
+      timerIsRunning: false,
     });
   }
   incrementSession() {
@@ -44,6 +54,7 @@ export default class timer extends Component {
         sessionLength: this.state.sessionLength + 1,
       });
     }
+    this.setTimer();
   }
   decrementSession() {
     if (this.state.sessionLength > 1) {
@@ -51,6 +62,7 @@ export default class timer extends Component {
         sessionLength: this.state.sessionLength - 1,
       });
     }
+    this.setTimer();
   }
   incrementBreak() {
     if (this.state.breakLength < 60) {
@@ -58,6 +70,7 @@ export default class timer extends Component {
         breakLength: this.state.breakLength + 1,
       });
     }
+    this.setTimer();
   }
   decrementBreak() {
     if (this.state.breakLength > 1) {
@@ -65,6 +78,26 @@ export default class timer extends Component {
         breakLength: this.state.breakLength - 1,
       });
     }
+    this.setTimer();
+  }
+  setTimer() {
+    if (this.state.timerIsRunning === "true") return;
+    if (this.state.timerType === "Session") {
+      this.setState(state => ({ timeLeft: state.sessionLength * 60 }));
+    }
+    if (this.state.timerType === "Break") {
+      this.setState(state => ({
+        timeLeft: state.breakLength * 60,
+      }));
+    }
+
+    // if (this.state.timerType === "Session") {
+    //   this.setState({
+    //     timeLeft: this.state.sessionLength * 60,
+    //   });
+    // }
+
+    this.setClock();
   }
   setClock() {
     let minutes = Math.floor(this.state.timeLeft / 60);
