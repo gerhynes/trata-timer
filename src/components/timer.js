@@ -8,6 +8,7 @@ export default class timer extends Component {
       sessionLength: 25,
       breakLength: 5,
       timeLeft: 1500,
+      timerType: "Session",
     };
     this.startTimer = this.startTimer.bind(this);
     this.pauseTimer = this.pauseTimer.bind(this);
@@ -18,9 +19,25 @@ export default class timer extends Component {
     this.decrementBreak = this.decrementBreak.bind(this);
     this.setClock = this.setClock.bind(this);
   }
-  startTimer() {}
-  pauseTimer() {}
-  resetTimer() {}
+  startTimer() {
+    // Clear any existing interval in case user presses start more than once
+    clearInterval(this.timer);
+
+    this.timer = setInterval(() => {
+      this.setState({
+        timeLeft: this.state.timeLeft - 1,
+      });
+    }, 1000);
+  }
+  pauseTimer() {
+    clearInterval(this.timer);
+  }
+  resetTimer() {
+    clearInterval(this.timer);
+    this.setState({
+      timeLeft: 1500,
+    });
+  }
   incrementSession() {
     if (this.state.sessionLength < 60) {
       this.setState({
@@ -67,11 +84,11 @@ export default class timer extends Component {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  class="icon-arrow-thin-up-circle"
+                  className="icon-arrow-thin-up-circle"
                 >
-                  <circle cx="12" cy="12" r="10" class="primary" />
+                  <circle cx="12" cy="12" r="10" className="primary" />
                   <path
-                    class="secondary"
+                    className="secondary"
                     d="M13 9.41V17a1 1 0 0 1-2 0V9.41l-2.3 2.3a1 1 0 1 1-1.4-1.42l4-4a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1-1.4 1.42L13 9.4z"
                   />
                 </svg>
@@ -83,11 +100,11 @@ export default class timer extends Component {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  class="icon-arrow-thin-down-circle"
+                  className="icon-arrow-thin-down-circle"
                 >
-                  <circle cx="12" cy="12" r="10" class="primary" />
+                  <circle cx="12" cy="12" r="10" className="primary" />
                   <path
-                    class="secondary"
+                    className="secondary"
                     d="M11 14.59V7a1 1 0 0 1 2 0v7.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.42l2.3 2.3z"
                   />
                 </svg>
@@ -101,11 +118,11 @@ export default class timer extends Component {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  class="icon-arrow-thin-up-circle"
+                  className="icon-arrow-thin-up-circle"
                 >
-                  <circle cx="12" cy="12" r="10" class="primary" />
+                  <circle cx="12" cy="12" r="10" className="primary" />
                   <path
-                    class="secondary"
+                    className="secondary"
                     d="M13 9.41V17a1 1 0 0 1-2 0V9.41l-2.3 2.3a1 1 0 1 1-1.4-1.42l4-4a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1-1.4 1.42L13 9.4z"
                   />
                 </svg>
@@ -117,11 +134,11 @@ export default class timer extends Component {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  class="icon-arrow-thin-down-circle"
+                  className="icon-arrow-thin-down-circle"
                 >
-                  <circle cx="12" cy="12" r="10" class="primary" />
+                  <circle cx="12" cy="12" r="10" className="primary" />
                   <path
-                    class="secondary"
+                    className="secondary"
                     d="M11 14.59V7a1 1 0 0 1 2 0v7.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.42l2.3 2.3z"
                   />
                 </svg>
@@ -138,44 +155,44 @@ export default class timer extends Component {
           </h3>
         </div>
         <div className="timer-controls">
-          <button>
+          <button onClick={this.startTimer}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              class="icon-play"
+              className="icon-play"
             >
-              <circle cx="12" cy="12" r="10" class="primary" />
+              <circle cx="12" cy="12" r="10" className="primary" />
               <path
-                class="secondary"
+                className="secondary"
                 d="M15.51 11.14a1 1 0 0 1 0 1.72l-5 3A1 1 0 0 1 9 15V9a1 1 0 0 1 1.51-.86l5 3z"
               />
             </svg>
           </button>
-          <button>
+          <button onClick={this.pauseTimer}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              class="icon-pause"
+              className="icon-pause"
             >
-              <circle cx="12" cy="12" r="10" class="primary" />
+              <circle cx="12" cy="12" r="10" className="primary" />
               <path
-                class="secondary"
+                className="secondary"
                 d="M9 8h1a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1zm5 0h1a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"
               />
             </svg>
           </button>
-          <button>
+          <button onClick={this.resetTimer}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              class="icon-history"
+              className="icon-history"
             >
               <path
-                class="primary"
+                className="primary"
                 d="M6.55 6.14l1.16 1.15A1 1 0 0 1 7 9H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1.7-.7l1.44 1.42A10 10 0 1 1 2 12a1 1 0 0 1 2 0 8 8 0 1 0 2.55-5.86z"
               />
               <path
-                class="secondary"
+                className="secondary"
                 d="M15.7 14.3a1 1 0 0 1-1.4 1.4l-3-3a1 1 0 0 1-.3-.7V7a1 1 0 0 1 2 0v4.59l2.7 2.7z"
               />
             </svg>
