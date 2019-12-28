@@ -1,21 +1,22 @@
-import React, { Component } from "react"
-import "./timer.css"
+import React, { Component } from "react";
+import "./timer.css";
 
 export default class timer extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       sessionLength: 25,
       breakLength: 5,
-      timeLeft: 25,
-    }
-    this.startTimer = this.startTimer.bind(this)
-    this.pauseTimer = this.pauseTimer.bind(this)
-    this.resetTimer = this.resetTimer.bind(this)
-    this.incrementSession = this.incrementSession.bind(this)
-    this.decrementSession = this.decrementSession.bind(this)
-    this.incrementBreak = this.incrementBreak.bind(this)
-    this.decrementBreak = this.decrementBreak.bind(this)
+      timeLeft: 1500,
+    };
+    this.startTimer = this.startTimer.bind(this);
+    this.pauseTimer = this.pauseTimer.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
+    this.incrementSession = this.incrementSession.bind(this);
+    this.decrementSession = this.decrementSession.bind(this);
+    this.incrementBreak = this.incrementBreak.bind(this);
+    this.decrementBreak = this.decrementBreak.bind(this);
+    this.setClock = this.setClock.bind(this);
   }
   startTimer() {}
   pauseTimer() {}
@@ -24,29 +25,36 @@ export default class timer extends Component {
     if (this.state.sessionLength < 60) {
       this.setState({
         sessionLength: this.state.sessionLength + 1,
-      })
+      });
     }
   }
   decrementSession() {
     if (this.state.sessionLength > 1) {
       this.setState({
         sessionLength: this.state.sessionLength - 1,
-      })
+      });
     }
   }
   incrementBreak() {
     if (this.state.breakLength < 60) {
       this.setState({
         breakLength: this.state.breakLength + 1,
-      })
+      });
     }
   }
   decrementBreak() {
     if (this.state.breakLength > 1) {
       this.setState({
         breakLength: this.state.breakLength - 1,
-      })
+      });
     }
+  }
+  setClock() {
+    let minutes = Math.floor(this.state.timeLeft / 60);
+    let seconds = this.state.timeLeft - minutes * 60;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    return `${minutes}:${seconds}`;
   }
   render() {
     return (
@@ -126,7 +134,7 @@ export default class timer extends Component {
             Session
           </h2>
           <h3 className="time-left" id="time-left">
-            {this.state.timeLeft}
+            {this.setClock()}
           </h3>
         </div>
         <div className="timer-controls">
@@ -174,6 +182,6 @@ export default class timer extends Component {
           </button>
         </div>
       </div>
-    )
+    );
   }
 }
