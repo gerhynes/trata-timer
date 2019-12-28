@@ -20,6 +20,7 @@ export default class timer extends Component {
     this.decrementBreak = this.decrementBreak.bind(this);
     this.setClock = this.setClock.bind(this);
     this.setTimer = this.setTimer.bind(this);
+    this.setTimerType = this.setTimerType.bind(this);
   }
   startTimer() {
     // Clear any existing interval in case user presses start more than once
@@ -33,6 +34,7 @@ export default class timer extends Component {
       this.setState({
         timeLeft: this.state.timeLeft - 1,
       });
+      this.setTimerType();
     }, 1000);
   }
   pauseTimer() {
@@ -43,10 +45,15 @@ export default class timer extends Component {
   }
   resetTimer() {
     clearInterval(this.timer);
-    this.setState({
-      timeLeft: 1500,
-      timerIsRunning: false,
-    });
+    this.state.timerType === "Session"
+      ? this.setState(state => ({
+          timeLeft: state.sessionLength * 60,
+          timerIsRunning: false,
+        }))
+      : this.setState(state => ({
+          timeLeft: state.breakLength * 60,
+          timerIsRunning: false,
+        }));
   }
   incrementSession() {
     if (this.state.sessionLength < 60) {
@@ -86,18 +93,22 @@ export default class timer extends Component {
       this.setState(state => ({ timeLeft: state.sessionLength * 60 }));
     }
     if (this.state.timerType === "Break") {
-      this.setState(state => ({
-        timeLeft: state.breakLength * 60,
-      }));
+      this.setState(state => ({ timeLeft: state.breakLength * 60 }));
     }
-
-    // if (this.state.timerType === "Session") {
-    //   this.setState({
-    //     timeLeft: this.state.sessionLength * 60,
-    //   });
-    // }
-
     this.setClock();
+  }
+  setTimerType() {
+    if (this.state.timeLeft < 0) {
+      this.state.timerType === "Session"
+        ? this.setState({
+            timeLeft: this.state.breakLength * 60,
+            timerType: "Break",
+          })
+        : this.setState({
+            timeLeft: this.state.SessionLength * 60,
+            timerType: "Session",
+          });
+    }
   }
   setClock() {
     let minutes = Math.floor(this.state.timeLeft / 60);
@@ -181,7 +192,7 @@ export default class timer extends Component {
         </div>
         <div className="display">
           <h2 className="timer-label" id="timer-label">
-            Session
+            {this.state.timerType}
           </h2>
           <h3 className="time-left" id="time-left">
             {this.setClock()}
