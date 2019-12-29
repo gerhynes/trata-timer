@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./timer.css";
+import Alarm from "../audio/Alarm.mp3";
 
 export default class timer extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export default class timer extends Component {
     this.setClock = this.setClock.bind(this);
     this.setTimer = this.setTimer.bind(this);
     this.setTimerType = this.setTimerType.bind(this);
+    this.playAlarm = this.playAlarm.bind(this);
   }
   startTimer() {
     // Clear any existing interval in case user presses start more than once
@@ -35,6 +37,9 @@ export default class timer extends Component {
         timeLeft: this.state.timeLeft - 1,
       });
       this.setTimerType();
+      if (this.state.timeLeft === 0) {
+        this.playAlarm();
+      }
     }, 1000);
   }
   pauseTimer() {
@@ -46,14 +51,16 @@ export default class timer extends Component {
   resetTimer() {
     clearInterval(this.timer);
     this.state.timerType === "Session"
-      ? this.setState(state => ({
-          timeLeft: state.sessionLength * 60,
+      ? this.setState(prevState => ({
+          timeLeft: prevState.sessionLength * 60,
           timerIsRunning: false,
         }))
-      : this.setState(state => ({
-          timeLeft: state.breakLength * 60,
+      : this.setState(prevState => ({
+          timeLeft: prevState.breakLength * 60,
           timerIsRunning: false,
         }));
+    this.audioBeep.pause();
+    this.audioBeep.currentTime = 0;
   }
   incrementSession() {
     if (this.state.sessionLength < 60) {
@@ -90,10 +97,10 @@ export default class timer extends Component {
   setTimer() {
     if (this.state.timerIsRunning === "true") return;
     if (this.state.timerType === "Session") {
-      this.setState(state => ({ timeLeft: state.sessionLength * 60 }));
+      this.setState(prevState => ({ timeLeft: prevState.sessionLength * 60 }));
     }
     if (this.state.timerType === "Break") {
-      this.setState(state => ({ timeLeft: state.breakLength * 60 }));
+      this.setState(prevState => ({ timeLeft: prevState.breakLength * 60 }));
     }
     this.setClock();
   }
@@ -116,6 +123,9 @@ export default class timer extends Component {
     seconds = seconds < 10 ? "0" + seconds : seconds;
     minutes = minutes < 10 ? "0" + minutes : minutes;
     return `${minutes}:${seconds}`;
+  }
+  playAlarm() {
+    this.audioBeep.play();
   }
   render() {
     return (
@@ -242,6 +252,13 @@ export default class timer extends Component {
             </svg>
           </button>
         </div>
+        <audio
+          src={Alarm}
+          id="beep"
+          ref={audio => {
+            this.audioBeep = audio;
+          }}
+        ></audio>
       </div>
     );
   }
