@@ -134,7 +134,7 @@ export default class timer extends Component {
           <div className="break-controls">
             <h3 id="break-label">Break Length</h3>
             <div className="break-controls-inner">
-              <button onClick={this.incrementBreak}>
+              <button onClick={this.incrementBreak} id="break-increment">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -150,7 +150,7 @@ export default class timer extends Component {
               <span className="break-length" id="break-length">
                 {this.state.breakLength}
               </span>
-              <button onClick={this.decrementBreak}>
+              <button onClick={this.decrementBreak} id="break-decrement">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -168,7 +168,7 @@ export default class timer extends Component {
           <div className="session-controls">
             <h3 id="session-label">Session Length</h3>
             <div className="session-controls-inner">
-              <button onClick={this.incrementSession}>
+              <button onClick={this.incrementSession} id="session-increment">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -184,7 +184,7 @@ export default class timer extends Component {
               <span className="session-length" id="session-length">
                 {this.state.sessionLength}
               </span>
-              <button onClick={this.decrementSession}>
+              <button onClick={this.decrementSession} id="session-decrement">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -209,7 +209,7 @@ export default class timer extends Component {
           </h3>
         </div>
         <div className="timer-controls">
-          <button onClick={this.startTimer}>
+          <button onClick={this.startTimer} id="start_stop">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -235,7 +235,7 @@ export default class timer extends Component {
               />
             </svg>
           </button>
-          <button onClick={this.resetTimer}>
+          <button onClick={this.resetTimer} id="reset">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
