@@ -5,8 +5,7 @@
   justify-content: center;
 }
 
-.break-controls-inner,
-.session-controls-inner {
+.controls-inner {
   display: flex;
   align-items: center;
   width: 100%;

@@ -140,14 +140,28 @@ export default class timer extends Component {
   render() {
     return (
       <div className="Timer">
-        <LengthControls
-          incrementBreak={this.incrementBreak}
-          breakLength={this.state.breakLength}
-          decrementBreak={this.decrementBreak}
-          incrementSession={this.incrementSession}
-          sessionLength={this.state.sessionLength}
-          decrementSession={this.decrementSession}
-        />
+        <div className="controls">
+          <LengthControls
+            label={"Break Length"}
+            labelID={"break-label"}
+            increment={this.incrementBreak}
+            incrementID={"break-increment"}
+            length={this.state.breakLength}
+            lengthID={"break-length"}
+            decrement={this.decrementBreak}
+            decrementID={"break-decrement"}
+          />
+          <LengthControls
+            label={"Session Length"}
+            labelID={"session-label"}
+            increment={this.incrementSession}
+            incrementID={"session-increment"}
+            length={this.state.sessionLength}
+            lengthID={"session-length"}
+            decrement={this.decrementSession}
+            decrementID={"session-decrement"}
+          />
+        </div>
         <Display timerType={this.state.timerType} setClock={this.setClock} />
         <TimerControls
           timerIsRunning={this.state.timerIsRunning}
