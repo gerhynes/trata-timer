@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LengthControls from "./lengthControls";
 import TimerControls from "./timerControls";
+import Display from "./display";
 import "./timer.css";
 import Alarm from "../audio/Alarm.mp3";
 
@@ -147,14 +148,7 @@ export default class timer extends Component {
           sessionLength={this.state.sessionLength}
           decrementSession={this.decrementSession}
         />
-        <div className="display">
-          <h2 className="timer-label" id="timer-label">
-            {this.state.timerType}
-          </h2>
-          <h3 className="time-left" id="time-left">
-            {this.setClock()}
-          </h3>
-        </div>
+        <Display timerType={this.state.timerType} setClock={this.setClock} />
         <TimerControls
           timerIsRunning={this.state.timerIsRunning}
           startTimer={this.startTimer}

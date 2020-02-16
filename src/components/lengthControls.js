@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function lengthControls(props) {
+export default function LengthControls(props) {
   const {
     incrementBreak,
     breakLength,

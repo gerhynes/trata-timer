@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function timerControls(props) {
+export default function TimerControls(props) {
   const { timerIsRunning, pauseTimer, startTimer, resetTimer } = props;
   return (
     <div className="timer-controls">
