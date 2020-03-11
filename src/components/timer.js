@@ -15,18 +15,144 @@ export default class timer extends Component {
       timerType: "Session",
       timerIsRunning: false,
     };
-    this.startTimer = this.startTimer.bind(this);
-    this.pauseTimer = this.pauseTimer.bind(this);
-    this.resetTimer = this.resetTimer.bind(this);
-    this.incrementSession = this.incrementSession.bind(this);
-    this.decrementSession = this.decrementSession.bind(this);
-    this.incrementBreak = this.incrementBreak.bind(this);
-    this.decrementBreak = this.decrementBreak.bind(this);
-    this.setClock = this.setClock.bind(this);
-    this.setTimer = this.setTimer.bind(this);
-    this.setTimerType = this.setTimerType.bind(this);
-    this.playAlarm = this.playAlarm.bind(this);
+    this.timer = null;
+
+    // this.startTimer = this.startTimer.bind(this);
+    // this.pauseTimer = this.pauseTimer.bind(this);
+    // this.resetTimer = this.resetTimer.bind(this);
+    // this.incrementSession = this.incrementSession.bind(this);
+    // this.decrementSession = this.decrementSession.bind(this);
+    // this.incrementBreak = this.incrementBreak.bind(this);
+    // this.decrementBreak = this.decrementBreak.bind(this);
+    // this.setClock = this.setClock.bind(this);
+    // this.setTimer = this.setTimer.bind(this);
+    // this.setTimerType = this.setTimerType.bind(this);
+    // this.playAlarm = this.playAlarm.bind(this);
   }
+
+  handlePlayPause = () => {
+    const { timerIsRunning } = this.state;
+
+    if (timerIsRunning) {
+      clearInterval(this.timer);
+
+      this.setState({
+        timerIsRunning: false,
+      });
+    } else {
+      this.setState({
+        timerIsRunning: true,
+      });
+
+      this.timer = setInterval(() => {
+        const { timeLeft, timerType, sessionLength, breakLength } = this.state;
+
+        if (timeLeft === 0) {
+          this.setState({
+            timerType: timerType === "Session" ? "Break" : "Session",
+            timeLeft:
+              timerType === "Session" ? breakLength * 60 : sessionLength * 60,
+          });
+
+          this.audioBeep.play();
+        } else {
+          this.setState({
+            timeLeft: timeLeft - 1,
+          });
+        }
+      }, 1000);
+    }
+  };
+
+  handleReset = () => {
+    this.setState({
+      breakLength: 5,
+      sessionLength: 25,
+      timeLeft: 1500,
+      timerType: "Session",
+      timerIsRunning: false,
+    });
+
+    clearInterval(this.timer);
+
+    this.audioBeep.pause();
+    this.audioBeep.currentTime = 0;
+  };
+
+  convertToClockTime = count => {
+    let minutes = Math.floor(count / 60);
+    let seconds = count % 60;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    return `${minutes}:${seconds}`;
+  };
+
+  handleLengthChange = (count, currentTimerType) => {
+    const {
+      sessionLength,
+      breakLength,
+      timerIsRunning,
+      timerType,
+    } = this.state;
+
+    let newTimer;
+
+    if (currentTimerType === "session") {
+      newTimer = sessionLength + count;
+    } else {
+      newTimer = breakLength + count;
+    }
+
+    if (newTimer > 0 && newTimer < 61 && !timerIsRunning) {
+      this.setState({
+        [`${currentTimerType}Length`]: newTimer,
+      });
+
+      if (timerType.toLowerCase() === currentTimerType) {
+        this.setState({
+          timeLeft: newTimer * 60,
+        });
+      }
+    }
+  };
+
+  render() {
+    const {
+      breakLength,
+      sessionLength,
+      timeLeft,
+      timerType,
+      timerIsRunning,
+    } = this.state;
+
+    const breakProps = {
+      title: "Break",
+      count: breakLength,
+      handleDecrement: () => this.handleLengthChange(-1, "break"),
+      handleIncrement: () => this.handleLengthChange(1, "break"),
+    };
+
+    const sessionProps = {
+      title: "Session",
+      count: sessionLength,
+      handleDecrement: () => this.handleLengthChange(-1, "break"),
+      handleIncrement: () => this.handleLengthChange(1, "break"),
+    };
+
+    return (
+      <div className="Timer">
+        <div className="controls">
+          <LengthControls />
+          <LengthControls />
+        </div>
+        <div className="clock-container">{/* Clock Goes Here */}</div>
+      </div>
+    );
+  }
+
+  // =====================
+  // Version 1.0
+  // =====================
 
   startTimer() {
     // Clear any existing interval in case user presses start more than once
@@ -142,24 +268,24 @@ export default class timer extends Component {
       <div className="Timer">
         <div className="controls">
           <LengthControls
-            label={"Break Length"}
-            labelID={"break-label"}
+            label="Break Length"
+            labelID="break-label"
             increment={this.incrementBreak}
-            incrementID={"break-increment"}
+            incrementID="break-increment"
             length={this.state.breakLength}
-            lengthID={"break-length"}
+            lengthID="break-length"
             decrement={this.decrementBreak}
-            decrementID={"break-decrement"}
+            decrementID="break-decrement"
           />
           <LengthControls
-            label={"Session Length"}
-            labelID={"session-label"}
+            label="Session Length"
+            labelID="session-label"
             increment={this.incrementSession}
-            incrementID={"session-increment"}
+            incrementID="session-increment"
             length={this.state.sessionLength}
-            lengthID={"session-length"}
+            lengthID="session-length"
             decrement={this.decrementSession}
-            decrementID={"session-decrement"}
+            decrementID="session-decrement"
           />
         </div>
         <Display timerType={this.state.timerType} setClock={this.setClock} />
