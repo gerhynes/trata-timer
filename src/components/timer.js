@@ -58,6 +58,8 @@ export default class timer extends Component {
   };
 
   handleReset = () => {
+    clearInterval(this.timer);
+
     this.setState({
       breakLength: 5,
       sessionLength: 25,
@@ -65,8 +67,6 @@ export default class timer extends Component {
       timerType: "Session",
       timerIsRunning: false,
     });
-
-    clearInterval(this.timer);
 
     this.alarmBeep.pause();
     this.alarmBeep.currentTime = 0;
