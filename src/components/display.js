@@ -5,7 +5,7 @@ export default function Display(props) {
   return (
     <div className="display">
       <h2 className="timer-label" id="timer-label">
-        {timerType}
+        {timerType === "Session" ? "Seisiún" : "Sos"}
       </h2>
       <h3 className="time-left" id="time-left">
         {convertToClockTime(timeLeft)}

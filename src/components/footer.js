@@ -1,13 +1,17 @@
-import React from "react"
-import "./footer.css"
+import React from "react";
+import "./footer.css";
 
 const Footer = () => (
   <footer className="footer">
-    Built with
-    {` `}
-    <a href="https://www.gatsbyjs.org">Gatsby</a> {` `}by{` `}
-    <a href="https://github.com/GK-Hynes">Ger Hynes</a>
+    <span>
+      Déanta le
+      {` `}
+      <a href="https://www.gatsbyjs.org">Gatsby</a>
+    </span>
+    <span>
+      <a href="https://github.com/GK-Hynes">Ger Hynes</a>
+    </span>
   </footer>
-)
+);
 
-export default Footer
+export default Footer;

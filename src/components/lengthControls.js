@@ -4,7 +4,9 @@ export default function LengthControls(props) {
   const id = props.title.toLowerCase();
   return (
     <div className="length-controls">
-      <h3 id={`${id}-label`}>{props.title} Length</h3>
+      <h3 id={`${id}-label`}>
+        Fad an {props.title === "Session" ? "tSeisiún" : "tSosa"}
+      </h3>
       <div className="controls-inner">
         <button onClick={props.handleIncrement} id={`${id}-increment`}>
           <svg
