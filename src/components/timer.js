@@ -136,16 +136,31 @@ export default class timer extends Component {
             handleIncrement={() => this.handleLengthChange(1, "session")}
           />
         </div>
-        <Display
-          timerType={timerType}
-          timeLeft={timeLeft}
-          convertToClockTime={this.convertToClockTime}
-        />
-        <TimerControls
-          timerIsRunning={timerIsRunning}
-          handlePlayPause={this.handlePlayPause}
-          handleReset={this.handleReset}
-        />
+        <div className="display-container">
+          <div className="display-top">
+            <Display
+              timerType={timerType}
+              timeLeft={timeLeft}
+              convertToClockTime={this.convertToClockTime}
+            />
+            <TimerControls
+              timerIsRunning={timerIsRunning}
+              handlePlayPause={this.handlePlayPause}
+              handleReset={this.handleReset}
+            />
+          </div>
+        </div>
+        <svg class="dial">
+          <circle
+            r="190"
+            cx="0"
+            cy="200"
+            fill="transparent"
+            stroke="#c53030"
+            stroke-width="15"
+            transform="rotate(-90 100 100)"
+          ></circle>
+        </svg>
         <audio
           src={Alarm}
           id="beep"
