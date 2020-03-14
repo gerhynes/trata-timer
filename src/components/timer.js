@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LengthControls from "./lengthControls";
 import TimerControls from "./timerControls";
 import Display from "./display";
+import ProgressCircle from "./progressCircle";
 import "./timer.css";
 import Alarm from "../audio/Alarm.mp3";
 
@@ -12,10 +13,12 @@ export default class timer extends Component {
       sessionLength: 25,
       breakLength: 5,
       timeLeft: 1500,
+      duration: 1500,
       timerType: "Session",
       timerIsRunning: false,
     };
     this.timer = null;
+    this.alarm = React.createRef();
   }
 
   handlePlayPause = () => {
@@ -36,7 +39,13 @@ export default class timer extends Component {
       });
 
       this.timer = setInterval(() => {
-        const { timeLeft, timerType, sessionLength, breakLength } = this.state;
+        const {
+          timeLeft,
+          duration,
+          timerType,
+          sessionLength,
+          breakLength,
+        } = this.state;
 
         // Change between session and break on 0
         if (timeLeft === 0) {
@@ -45,7 +54,7 @@ export default class timer extends Component {
             timeLeft:
               timerType === "Session" ? breakLength * 60 : sessionLength * 60,
           });
-          this.alarmBeep.play();
+          this.alarm.current.play();
         }
         // Decrement timer while running
         else {
@@ -64,12 +73,13 @@ export default class timer extends Component {
       breakLength: 5,
       sessionLength: 25,
       timeLeft: 1500,
+      duration: 1500,
       timerType: "Session",
       timerIsRunning: false,
     });
 
-    this.alarmBeep.pause();
-    this.alarmBeep.currentTime = 0;
+    this.alarm.current.pause();
+    this.alarm.current.currentTime = 0;
   };
 
   // Convert timeLeft from seconds to minutes and seconds
@@ -106,6 +116,7 @@ export default class timer extends Component {
       if (timerType.toLowerCase() === currentTimerType) {
         this.setState({
           timeLeft: newTimer * 60,
+          duration: newTimer * 60,
         });
       }
     }
@@ -116,6 +127,7 @@ export default class timer extends Component {
       breakLength,
       sessionLength,
       timeLeft,
+      duration,
       timerType,
       timerIsRunning,
     } = this.state;
@@ -149,25 +161,9 @@ export default class timer extends Component {
               handleReset={this.handleReset}
             />
           </div>
-          <svg class="dial">
-            <circle
-              r="190"
-              cx="0"
-              cy="200"
-              fill="transparent"
-              stroke="#c53030"
-              stroke-width="15"
-              transform="rotate(-90 100 100)"
-            ></circle>
-          </svg>
+          <ProgressCircle timeLeft={timeLeft} duration={duration} />
         </div>
-        <audio
-          src={Alarm}
-          id="beep"
-          ref={audio => {
-            this.alarmBeep = audio;
-          }}
-        ></audio>
+        <audio src={Alarm} id="beep" ref={this.alarm}></audio>
       </div>
     );
   }
