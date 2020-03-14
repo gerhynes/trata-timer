@@ -1,5 +1,14 @@
+* {
+  /* outline: 1px solid lightcoral; */
+}
+
 .Timer {
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .controls {
@@ -65,15 +74,11 @@ button .secondary {
 
 .display-container {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.display-top {
-  outline: 1px solid blue;
+.display-inner {
   position: absolute;
-  top: 0;
+  top: 5%;
   left: 0;
   height: 400px;
   width: 400px;
