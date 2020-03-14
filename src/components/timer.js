@@ -53,6 +53,8 @@ export default class timer extends Component {
             timerType: timerType === "Session" ? "Break" : "Session",
             timeLeft:
               timerType === "Session" ? breakLength * 60 : sessionLength * 60,
+            duration:
+              timerType === "Session" ? breakLength * 60 : sessionLength * 60,
           });
           this.alarm.current.play();
         }
