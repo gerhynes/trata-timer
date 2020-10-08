@@ -9,7 +9,7 @@ const Footer = () => (
       <a href="https://www.gatsbyjs.org">Gatsby</a>
     </span>
     <span>
-      <a href="https://github.com/GK-Hynes">Ger Hynes</a>
+      <a href="https://github.com/GK-Hynes">Gerard Hynes</a>
     </span>
   </footer>
 );

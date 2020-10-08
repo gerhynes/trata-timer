@@ -1,0 +1,15 @@
+.Header {
+  background: #c53030;
+  margin-bottom: 1.45rem;
+}
+
+.Header__link {
+  color: white;
+  text-decoration: none;
+}
+
+.Header__title {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.5rem 1rem;
+}
