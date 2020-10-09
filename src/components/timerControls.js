@@ -1,7 +1,6 @@
 import React from "react";
 
-export default function TimerControls(props) {
-  const { timerIsRunning, handlePlayPause, handleReset } = props;
+export default function TimerControls({ timerIsRunning, handlePlayPause, handleReset }) {
   return (
     <div className="timer-controls">
       <button id="start_stop" onClick={handlePlayPause}>

@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Tráta Timer`,
     description: `I'm not sure if Gatsby is overkill for a Pomodoro timer, but let's find out.`,
-    author: `Ger`,
+    author: `Gerard Hynes`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
