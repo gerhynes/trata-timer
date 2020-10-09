@@ -97,19 +97,10 @@ export default function Timer() {
 
   return (
     <div className="Timer">
-      <div className="controls">
-        <LengthControls
-          title={"Break"}
-          count={breakLength}
-          handleDecrement={() => handleLengthChange(-1, "break")}
-          handleIncrement={() => handleLengthChange(1, "break")}
-        />
-        <LengthControls
-          title={"Session"}
-          count={sessionLength}
-          handleDecrement={() => handleLengthChange(-1, "session")}
-          handleIncrement={() => handleLengthChange(1, "session")}
-        />
+      <div className="shortcuts">
+        <button className="shortcut-btn">Seisiún</button>
+        <button className="shortcut-btn">Sos Beag</button>
+        <button className="shortcut-btn">Sos Mór</button>
       </div>
       <div className="display-container">
         <div className="display-inner">
@@ -125,6 +116,20 @@ export default function Timer() {
           />
         </div>
         <ProgressCircle timeLeft={timeLeft} duration={duration} />
+      </div>
+      <div className="controls">
+        <LengthControls
+          title={"Break"}
+          count={breakLength}
+          handleDecrement={() => handleLengthChange(-1, "break")}
+          handleIncrement={() => handleLengthChange(1, "break")}
+        />
+        <LengthControls
+          title={"Session"}
+          count={sessionLength}
+          handleDecrement={() => handleLengthChange(-1, "session")}
+          handleIncrement={() => handleLengthChange(1, "session")}
+        />
       </div>
       <audio src={Alarm} id="beep" ref={alarm}></audio>
     </div>

@@ -1,9 +1,13 @@
 import React from "react";
 
-export default function TimerControls({ timerIsRunning, handlePlayPause, handleReset }) {
+export default function TimerControls({
+  timerIsRunning,
+  handlePlayPause,
+  handleReset,
+}) {
   return (
     <div className="timer-controls">
-      <button id="start_stop" onClick={handlePlayPause}>
+      <button className="button" id="start_stop" onClick={handlePlayPause}>
         {timerIsRunning ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +34,7 @@ export default function TimerControls({ timerIsRunning, handlePlayPause, handleR
           </svg>
         )}
       </button>
-      <button id="reset" onClick={handleReset}>
+      <button className="button" id="reset" onClick={handleReset}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

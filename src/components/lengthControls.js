@@ -8,7 +8,11 @@ export default function LengthControls(props) {
         Fad an {props.title === "Session" ? "tSeisiún" : "tSosa"}
       </h3>
       <div className="controls-inner">
-        <button onClick={props.handleIncrement} id={`${id}-increment`}>
+        <button
+          className="button"
+          onClick={props.handleIncrement}
+          id={`${id}-increment`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -22,7 +26,11 @@ export default function LengthControls(props) {
           </svg>
         </button>
         <h3 id={`${id}-length`}>{props.count}</h3>
-        <button onClick={props.handleDecrement} id={`${id}-decrement`}>
+        <button
+          className="button"
+          onClick={props.handleDecrement}
+          id={`${id}-decrement`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
