@@ -1,9 +1,9 @@
-.footer {
+.Footer {
   padding: 1rem;
   margin-top: 3rem;
   text-align: center;
 }
 
-.footer span {
-  margin: 0 0.5rem;
+.Footer__links {
+  margin: 0.5rem;
 }
