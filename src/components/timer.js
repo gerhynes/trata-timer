@@ -13,7 +13,6 @@ export default function Timer() {
   const [timerType, setTimerType] = useState("Session");
   const [timerIsRunning, setTimerIsRunning] = useState(false);
   const alarm = useRef();
-  const context = new AudioContext();
 
   const incrementSession = () => {
     if (!timerIsRunning && sessionLength < 60) {
@@ -70,7 +69,6 @@ export default function Timer() {
   }, [timerIsRunning, timeLeft, timerType, breakLength, sessionLength, alarm]);
 
   const handleStart = () => {
-    context.resume();
     setTimerIsRunning(true);
   };
 
