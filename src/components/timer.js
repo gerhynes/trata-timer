@@ -7,49 +7,82 @@ import "./Timer.css";
 import Alarm from "../audio/Alarm.mp3";
 
 export default function Timer() {
-  let timer = null;
-  const alarm = useRef();
   const [sessionLength, setSessionLength] = useState(25);
   const [breakLength, setBreakLength] = useState(5);
   const [timeLeft, setTimeLeft] = useState(1500);
   const [duration, setDuration] = useState(1500);
   const [timerType, setTimerType] = useState("Session");
   const [timerIsRunning, setTimerIsRunning] = useState(false);
+  const alarm = useRef();
+  const context = new AudioContext();
 
-  const handlePlayPause = () => {
-    // Pause timer if running
-    if (timerIsRunning) {
-      clearInterval(timer);
-      setTimerIsRunning(false);
-    }
-    // Otherwise start timer
-    else {
-      setTimerIsRunning(true);
-
-      timer = setInterval(() => {
-        // Change between session and break on 0
-        if (timeLeft === 0) {
-          setTimerType(timerType === "Session" ? "Break" : "Session");
-          setTimeLeft(
-            timerType === "Session" ? breakLength * 60 : sessionLength * 60
-          );
-          setDuration(
-            timerType === "Session" ? breakLength * 60 : sessionLength * 60
-          );
-          alarm.current.play();
-        }
-        // Decrement timer while running
-        else {
-          setTimeLeft(timeLeft - 1);
-        }
-      }, 1000);
+  const incrementSession = () => {
+    if (!timerIsRunning && sessionLength < 60) {
+      setSessionLength(sessionLength + 1);
+      setTimeLeft((sessionLength + 1) * 60);
     }
   };
 
+  const decrementSession = () => {
+    if (!timerIsRunning && sessionLength > 1) {
+      setSessionLength(sessionLength - 1);
+      setTimeLeft((sessionLength - 1) * 60);
+    }
+  };
+
+  const incrementBreak = () => {
+    if (!timerIsRunning && breakLength < 60) {
+      setBreakLength(breakLength + 1);
+    }
+  };
+
+  const decrementBreak = () => {
+    if (!timerIsRunning && breakLength > 1) {
+      setBreakLength(breakLength - 1);
+    }
+  };
+
+  useEffect(() => {
+    const changeTimerType = () => {
+      if (timerType === "Session") {
+        setTimerType("Break");
+        setTimeLeft(breakLength * 60);
+      } else if (timerType === "Break") {
+        setTimerType("Session");
+        setTimeLeft(sessionLength * 60);
+      }
+    };
+
+    let timer = null;
+    if (timerIsRunning && timeLeft > 0) {
+      timer = setInterval(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
+    } else if (timerIsRunning && timeLeft === 0) {
+      timer = setInterval(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
+      alarm.current.play();
+      changeTimerType();
+    } else {
+      clearInterval(timer);
+    }
+    return () => clearInterval(timer);
+  }, [timerIsRunning, timeLeft, timerType, breakLength, sessionLength, alarm]);
+
+  const handleStart = () => {
+    context.resume();
+    setDuration(timeLeft);
+    setTimerIsRunning(true);
+  };
+
+  const handlePause = () => {
+    setTimerIsRunning(false);
+  };
+
   const handleReset = () => {
-    clearInterval(timer);
-    setBreakLength(5);
     setSessionLength(25);
+    setBreakLength(5);
     setTimeLeft(1500);
     setDuration(1500);
     setTimerType("Session");
@@ -65,34 +98,6 @@ export default function Timer() {
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
     return `${minutes}:${seconds}`;
-  };
-
-  const handleLengthChange = (count, currentTimerType) => {
-    let newTimer;
-
-    if (currentTimerType === "Session") {
-      newTimer = sessionLength + count;
-    } else {
-      newTimer = breakLength + count;
-    }
-
-    // Make sure sessions and breaks are between 1 and 60 minutes
-    if (newTimer > 0 && newTimer < 61 && !timerIsRunning) {
-      // this.setState({
-      //   [`${currentTimerType}Length`]: newTimer,
-      // });
-
-      if (currentTimerType === "Session") {
-        setSessionLength(newTimer);
-      } else if (currentTimerType === "Break") {
-        setBreakLength(newTimer);
-      }
-
-      if (timerType.toLowerCase() === currentTimerType) {
-        setTimeLeft(newTimer * 60);
-        setDuration(newTimer * 60);
-      }
-    }
   };
 
   return (
@@ -111,7 +116,8 @@ export default function Timer() {
           />
           <TimerControls
             timerIsRunning={timerIsRunning}
-            handlePlayPause={handlePlayPause}
+            handleStart={handleStart}
+            handlePause={handlePause}
             handleReset={handleReset}
           />
         </div>
@@ -121,14 +127,14 @@ export default function Timer() {
         <LengthControls
           title={"Break"}
           count={breakLength}
-          handleDecrement={() => handleLengthChange(-1, "break")}
-          handleIncrement={() => handleLengthChange(1, "break")}
+          handleDecrement={decrementBreak}
+          handleIncrement={incrementBreak}
         />
         <LengthControls
           title={"Session"}
           count={sessionLength}
-          handleDecrement={() => handleLengthChange(-1, "session")}
-          handleIncrement={() => handleLengthChange(1, "session")}
+          handleDecrement={decrementSession}
+          handleIncrement={incrementSession}
         />
       </div>
       <audio src={Alarm} id="beep" ref={alarm}></audio>

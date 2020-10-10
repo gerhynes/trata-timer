@@ -2,12 +2,17 @@ import React from "react";
 
 export default function TimerControls({
   timerIsRunning,
-  handlePlayPause,
+  handleStart,
+  handlePause,
   handleReset,
 }) {
   return (
     <div className="timer-controls">
-      <button className="button" id="start_stop" onClick={handlePlayPause}>
+      <button
+        className="button"
+        id="start_stop"
+        onClick={timerIsRunning ? handlePause : handleStart}
+      >
         {timerIsRunning ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"

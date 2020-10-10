@@ -1,16 +1,21 @@
 import React from "react";
 
-export default function LengthControls(props) {
-  const id = props.title.toLowerCase();
+export default function LengthControls({
+  count,
+  title,
+  handleIncrement,
+  handleDecrement,
+}) {
+  const id = title.toLowerCase();
   return (
     <div className="length-controls">
       <h3 id={`${id}-label`}>
-        Fad an {props.title === "Session" ? "tSeisiún" : "tSosa"}
+        Fad an {title === "Session" ? "tSeisiún" : "tSosa"}
       </h3>
       <div className="controls-inner">
         <button
           className="button"
-          onClick={props.handleIncrement}
+          onClick={handleIncrement}
           id={`${id}-increment`}
         >
           <svg
@@ -25,10 +30,10 @@ export default function LengthControls(props) {
             />
           </svg>
         </button>
-        <h3 id={`${id}-length`}>{props.count}</h3>
+        <h3 id={`${id}-length`}>{count}</h3>
         <button
           className="button"
-          onClick={props.handleDecrement}
+          onClick={handleDecrement}
           id={`${id}-decrement`}
         >
           <svg
