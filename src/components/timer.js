@@ -98,48 +98,50 @@ export default function Timer() {
   };
 
   return (
-    <div className="Timer">
-      <div className="shortcuts">
-        <button className="shortcut-btn">Seisiún</button>
-        <button className="shortcut-btn">Sos Beag</button>
-        <button className="shortcut-btn">Sos Mór</button>
-      </div>
-      <div className="display-container">
-        <div className="display-inner">
-          <Display
-            timerType={timerType}
+    <div className="container">
+      <div className="Timer">
+        <div className="shortcuts">
+          <button className="shortcut-btn">Seisiún</button>
+          <button className="shortcut-btn">Sos Beag</button>
+          <button className="shortcut-btn">Sos Mór</button>
+        </div>
+        <div className="display-container">
+          <div className="display-inner">
+            <Display
+              timerType={timerType}
+              timeLeft={timeLeft}
+              convertToClockTime={convertToClockTime}
+            />
+            <TimerControls
+              timerIsRunning={timerIsRunning}
+              handleStart={handleStart}
+              handlePause={handlePause}
+              handleReset={handleReset}
+            />
+          </div>
+          <ProgressCircle
             timeLeft={timeLeft}
-            convertToClockTime={convertToClockTime}
-          />
-          <TimerControls
-            timerIsRunning={timerIsRunning}
-            handleStart={handleStart}
-            handlePause={handlePause}
-            handleReset={handleReset}
+            timerDuration={
+              timerType === "Session" ? sessionLength * 60 : breakLength * 60
+            }
           />
         </div>
-        <ProgressCircle
-          timeLeft={timeLeft}
-          timerDuration={
-            timerType === "Session" ? sessionLength * 60 : breakLength * 60
-          }
-        />
+        <div className="controls">
+          <LengthControls
+            title={"Break"}
+            count={breakLength}
+            handleDecrement={decrementBreak}
+            handleIncrement={incrementBreak}
+          />
+          <LengthControls
+            title={"Session"}
+            count={sessionLength}
+            handleDecrement={decrementSession}
+            handleIncrement={incrementSession}
+          />
+        </div>
+        <audio src={Alarm} id="beep" ref={alarm}></audio>
       </div>
-      <div className="controls">
-        <LengthControls
-          title={"Break"}
-          count={breakLength}
-          handleDecrement={decrementBreak}
-          handleIncrement={incrementBreak}
-        />
-        <LengthControls
-          title={"Session"}
-          count={sessionLength}
-          handleDecrement={decrementSession}
-          handleIncrement={incrementSession}
-        />
-      </div>
-      <audio src={Alarm} id="beep" ref={alarm}></audio>
     </div>
   );
 }
