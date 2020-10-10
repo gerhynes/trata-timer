@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import LengthControls from "./LengthControls";
-import TimerControls from "./TimerControls";
-import Display from "./Display";
-import ProgressCircle from "./ProgressCircle";
-import "./Timer.css";
+import LengthControls from "./lengthControls";
+import TimerControls from "./timerControls";
+import Display from "./display";
+import ProgressCircle from "./progressCircle";
+import "./timer.css";
 import Alarm from "../audio/Alarm.mp3";
 
 export default function Timer() {
