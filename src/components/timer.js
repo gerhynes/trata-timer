@@ -12,6 +12,7 @@ export default function Timer() {
   const [timeLeft, setTimeLeft] = useState(1500);
   const [timerType, setTimerType] = useState("Session");
   const [timerIsRunning, setTimerIsRunning] = useState(false);
+  const [completedSessions, setCompletedSessions] = useState(0);
   const alarm = useRef();
 
   const incrementSession = () => {
@@ -60,6 +61,9 @@ export default function Timer() {
       timer = setInterval(() => {
         setTimeLeft(timeLeft - 1);
       }, 1000);
+      if (timerType === "Session") {
+        setCompletedSessions(completedSessions + 1);
+      }
       alarm.current.play();
       changeTimerType();
     } else {
@@ -139,6 +143,9 @@ export default function Timer() {
           />
         </div>
         <audio src={Alarm} id="beep" ref={alarm}></audio>
+      </div>
+      <div className="completedSessions">
+        <h3>Críochnaithe: {completedSessions}</h3>
       </div>
     </div>
   );
