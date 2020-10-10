@@ -1,8 +1,9 @@
 import React from "react";
 
-export default function progressCircle({ timeLeft, duration }) {
+export default function progressCircle({ timeLeft, timerDuration }) {
   const perimeter = 190 * 2 * Math.PI;
-  const dashOffset = (perimeter * timeLeft) / duration - perimeter;
+
+  const dashOffset = (perimeter * timeLeft) / timerDuration - perimeter;
 
   return (
     <svg className="progressCircle">

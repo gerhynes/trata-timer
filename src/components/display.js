@@ -1,7 +1,6 @@
 import React from "react";
 
-export default function Display(props) {
-  const { timerType, convertToClockTime, timeLeft } = props;
+export default function Display({ timerType, convertToClockTime, timeLeft }) {
   return (
     <div className="display">
       <h2 className="timer-label" id="timer-label">

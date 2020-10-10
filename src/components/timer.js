@@ -10,7 +10,6 @@ export default function Timer() {
   const [sessionLength, setSessionLength] = useState(25);
   const [breakLength, setBreakLength] = useState(5);
   const [timeLeft, setTimeLeft] = useState(1500);
-  const [duration, setDuration] = useState(1500);
   const [timerType, setTimerType] = useState("Session");
   const [timerIsRunning, setTimerIsRunning] = useState(false);
   const alarm = useRef();
@@ -72,7 +71,6 @@ export default function Timer() {
 
   const handleStart = () => {
     context.resume();
-    setDuration(timeLeft);
     setTimerIsRunning(true);
   };
 
@@ -84,7 +82,6 @@ export default function Timer() {
     setSessionLength(25);
     setBreakLength(5);
     setTimeLeft(1500);
-    setDuration(1500);
     setTimerType("Session");
     setTimerIsRunning(false);
     alarm.current.pause();
@@ -121,7 +118,12 @@ export default function Timer() {
             handleReset={handleReset}
           />
         </div>
-        <ProgressCircle timeLeft={timeLeft} duration={duration} />
+        <ProgressCircle
+          timeLeft={timeLeft}
+          timerDuration={
+            timerType === "Session" ? sessionLength * 60 : breakLength * 60
+          }
+        />
       </div>
       <div className="controls">
         <LengthControls

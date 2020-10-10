@@ -1,9 +1,9 @@
-import React from "react"
-import PropTypes from "prop-types"
-import Header from "./header"
-import Footer from "./footer"
-import "normalize.css"
-import "./Layout.css"
+import React from "react";
+import PropTypes from "prop-types";
+import Header from "./header";
+import Footer from "./footer";
+import "normalize.css";
+import "./Layout.css";
 
 const Layout = ({ children }) => {
   return (
@@ -16,11 +16,11 @@ const Layout = ({ children }) => {
       </div>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;
