@@ -10,7 +10,7 @@ export default function LengthControls({
   return (
     <div className="length-controls">
       <h3 id={`${id}-label`}>
-        Fad an {title === "Session" ? "tSeisiún" : "tSosa"}
+        Fad an {title === "Session" ? "tSeisiúin" : "tSosa"}
       </h3>
       <div className="controls-inner">
         <button
