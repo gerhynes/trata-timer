@@ -36,7 +36,6 @@ h3 {
 }
 
 .button {
-  width: 4rem;
   margin: 1rem;
   background: transparent;
   border: none;
@@ -45,16 +44,62 @@ h3 {
 
 .button .primary {
   fill: #c53030;
+  transition: fill 300ms ease-in-out;
+}
+
+.button:hover .primary {
+  fill: #9b2c2c;
 }
 
 .button .secondary {
   fill: #fff;
 }
 
+.icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  position: relative;
+}
+
+.icon::before,
+.icon::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+.icon:active::after {
+  background: #c53030;
+  z-index: 1;
+  animation: pulse 1000ms forwards;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
 .break-length,
 .session-length {
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+.length {
+  /* Prevent jank on different number widths */
+  width: 1.75rem;
 }
 
 .display {
@@ -97,9 +142,6 @@ h3 {
   width: 400px;
 }
 
-.shortcuts {
-}
-
 .shortcut-btn {
   background: #c53030;
   color: #fff;
@@ -114,7 +156,7 @@ h3 {
 .completedSessions {
   background: #fff;
   width: 100%;
-  max-width: 450px;
+  max-width: 475px;
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 0.25rem;

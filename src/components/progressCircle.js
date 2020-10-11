@@ -14,7 +14,7 @@ export default function progressCircle({ timeLeft, timerDuration }) {
         cy="200"
         fill="transparent"
         stroke="#c53030"
-        strokeWidth="15"
+        strokeWidth="10"
         transform="rotate(-90 100 100)"
       ></circle>
     </svg>
