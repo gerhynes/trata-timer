@@ -4,9 +4,10 @@
 }
 
 .Timer {
-  margin: 0 auto;
-  padding: 1rem;
-  max-width: 640px;
+  margin: 1rem auto;
+  padding: 1rem 0;
+  width: 100%;
+  max-width: 475px;
   background: #fff;
   border-radius: 0.25rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
@@ -126,23 +127,30 @@ h3 {
 .display-container {
   position: relative;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .display-inner {
   position: absolute;
   top: 15%;
   left: 0;
-  height: 400px;
-  width: 400px;
+  height: 350px;
+  width: 350px;
 }
 
 .progressCircle {
-  height: 400px;
-  width: 400px;
+  height: 350px;
+  width: 350px;
+}
+
+.shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .shortcut-btn {
+  display: block;
   background: #c53030;
   color: #fff;
   border: none;
