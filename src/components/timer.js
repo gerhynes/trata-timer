@@ -70,7 +70,15 @@ export default function Timer() {
       clearInterval(timer);
     }
     return () => clearInterval(timer);
-  }, [timerIsRunning, timeLeft, timerType, breakLength, sessionLength, alarm]);
+  }, [
+    timerIsRunning,
+    timeLeft,
+    timerType,
+    breakLength,
+    sessionLength,
+    alarm,
+    completedSessions,
+  ]);
 
   const handleStart = () => {
     setTimerIsRunning(true);
@@ -90,6 +98,25 @@ export default function Timer() {
     alarm.current.currentTime = 0;
   };
 
+  const startSession = () => {
+    setTimerType("Session");
+    setTimeLeft(sessionLength * 60);
+    setTimerIsRunning(true);
+  };
+
+  const startShortBreak = () => {
+    setTimerType("Break");
+    setTimeLeft(breakLength * 60);
+    setTimerIsRunning(true);
+  };
+
+  const startLongBreak = () => {
+    setTimerType("Break");
+    setBreakLength(15);
+    setTimeLeft(15 * 60);
+    setTimerIsRunning(true);
+  };
+
   // Convert timeLeft from seconds to minutes and seconds
   const convertToClockTime = count => {
     let minutes = Math.floor(count / 60);
@@ -103,9 +130,15 @@ export default function Timer() {
     <div className="container">
       <div className="Timer">
         <div className="shortcuts">
-          <button className="shortcut-btn">Seisiún</button>
-          <button className="shortcut-btn">Sos Beag</button>
-          <button className="shortcut-btn">Sos Mór</button>
+          <button className="shortcut-btn" onClick={startSession}>
+            Seisiún
+          </button>
+          <button className="shortcut-btn" onClick={startShortBreak}>
+            Sos Beag
+          </button>
+          <button className="shortcut-btn" onClick={startLongBreak}>
+            Sos Mór
+          </button>
         </div>
         <div className="display-container">
           <div className="display-inner">
