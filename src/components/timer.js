@@ -106,6 +106,7 @@ export default function Timer() {
 
   const startShortBreak = () => {
     setTimerType("Break");
+    setBreakLength(5);
     setTimeLeft(breakLength * 60);
     setTimerIsRunning(true);
   };

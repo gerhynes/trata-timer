@@ -159,6 +159,11 @@ h3 {
   padding: 0.75rem 1.25rem;
   margin: 1rem 0.5rem;
   cursor: pointer;
+  transition: background-color 300ms ease;
+}
+
+.shortcut-btn:hover {
+  background: #9b2c2c;
 }
 
 .completedSessions {
