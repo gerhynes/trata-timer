@@ -9,7 +9,7 @@ export default function LengthControls({
   const id = title.toLowerCase();
   return (
     <div className="length-controls">
-      <h3 id={`${id}-label`}>
+      <h3 class="length-label" id={`${id}-label`}>
         Fad an {title === "Session" ? "tSeisiúin" : "tSosa"}
       </h3>
       <div className="controls-inner">
@@ -32,7 +32,7 @@ export default function LengthControls({
             </svg>
           </div>
         </button>
-        <h3 className="length" id={`${id}-length`}>
+        <h3 className="length-label" id={`${id}-length`}>
           {count}
         </h3>
         <button

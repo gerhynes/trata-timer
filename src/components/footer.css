@@ -1,9 +1,8 @@
 .Footer {
-  padding: 1rem;
-  margin-top: 3rem;
+  padding: 0.5rem;
   text-align: center;
 }
 
-.Footer__links {
+.Footer__link {
   margin: 0.5rem;
 }

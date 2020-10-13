@@ -32,7 +32,7 @@
   width: 100%;
 }
 
-h3 {
+.length-label {
   margin-bottom: 0.5rem;
 }
 
@@ -105,7 +105,7 @@ h3 {
 
 .display {
   text-align: center;
-  margin: 2rem;
+  margin-top: 2rem;
 }
 
 .timer-label {

@@ -179,7 +179,7 @@ export default function Timer() {
         <audio src={Alarm} id="beep" ref={alarm}></audio>
       </div>
       <div className="completedSessions">
-        <h3>Críochnaithe: {completedSessions}</h3>
+        <h3>Seisiúin déanta: {completedSessions}</h3>
       </div>
     </div>
   );
