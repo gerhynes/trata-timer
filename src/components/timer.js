@@ -44,8 +44,16 @@ export default function Timer() {
   useEffect(() => {
     const changeTimerType = () => {
       if (timerType === "Session") {
-        setTimerType("Break");
-        setTimeLeft(breakLength * 60);
+        // Set longer breaks after every 4 completed sessions
+        if (completedSessions % 4 === 0 && breakLength < 15) {
+          setTimerType("Break");
+          setBreakLength(15);
+          setTimeLeft(15 * 60);
+        } else {
+          setTimerType("Break");
+          setBreakLength(5);
+          setTimeLeft(breakLength * 60);
+        }
       } else if (timerType === "Break") {
         setTimerType("Session");
         setTimeLeft(sessionLength * 60);
@@ -119,7 +127,7 @@ export default function Timer() {
   };
 
   // Convert timeLeft from seconds to minutes and seconds
-  const convertToClockTime = count => {
+  const formatTime = count => {
     let minutes = Math.floor(count / 60);
     let seconds = count % 60;
     minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -146,7 +154,7 @@ export default function Timer() {
             <Display
               timerType={timerType}
               timeLeft={timeLeft}
-              convertToClockTime={convertToClockTime}
+              formatTime={formatTime}
             />
             <TimerControls
               timerIsRunning={timerIsRunning}
@@ -177,9 +185,10 @@ export default function Timer() {
           />
         </div>
         <audio src={Alarm} id="beep" ref={alarm}></audio>
-      </div>
-      <div className="completedSessions">
-        <h3>Seisiúin déanta: {completedSessions}</h3>
+        <hr className="divider" />
+        <div className="completedSessions">
+          <h3>Seisiúin déanta: {completedSessions}</h3>
+        </div>
       </div>
     </div>
   );

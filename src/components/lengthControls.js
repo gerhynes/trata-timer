@@ -9,7 +9,7 @@ export default function LengthControls({
   const id = title.toLowerCase();
   return (
     <div className="length-controls">
-      <h3 class="length-label" id={`${id}-label`}>
+      <h3 className="length-label" id={`${id}-label`}>
         Fad an {title === "Session" ? "tSeisiúin" : "tSosa"}
       </h3>
       <div className="controls-inner">
