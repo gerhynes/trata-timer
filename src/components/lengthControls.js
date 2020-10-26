@@ -17,6 +17,7 @@ export default function LengthControls({
           className="button"
           onClick={handleIncrement}
           id={`${id}-increment`}
+          aria-label={`Increment ${title}`}
         >
           <div className="icon">
             <svg
@@ -39,6 +40,7 @@ export default function LengthControls({
           className="button"
           onClick={handleDecrement}
           id={`${id}-decrement`}
+          aria-label={`Decrement ${title}`}
         >
           <div className="icon">
             <svg

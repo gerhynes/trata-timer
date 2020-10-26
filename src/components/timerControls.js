@@ -12,6 +12,7 @@ export default function TimerControls({
         className="button"
         id="start_stop"
         onClick={timerIsRunning ? handlePause : handleStart}
+        aria-label="Start/Stop Button"
       >
         <div className="icon">
           {timerIsRunning ? (
@@ -41,7 +42,12 @@ export default function TimerControls({
           )}
         </div>
       </button>
-      <button className="button" id="reset" onClick={handleReset}>
+      <button
+        className="button"
+        id="reset"
+        onClick={handleReset}
+        aria-label="Reset Button"
+      >
         <div className="icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
