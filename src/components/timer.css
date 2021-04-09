@@ -19,21 +19,23 @@
 }
 
 .controls {
-  display: flex;
   width: 100%;
-  text-align: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
 }
 
 .controls-inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  width: 100%;
 }
 
 .length-label {
-  margin-bottom: 0.5rem;
+  /* Prevent jank on different number widths */
+  text-align: center;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
 }
 
 .button {
@@ -96,11 +98,6 @@
 .session-length {
   font-weight: bold;
   font-size: 1.5rem;
-}
-
-.length {
-  /* Prevent jank on different number widths */
-  width: 1.75rem;
 }
 
 .display {
