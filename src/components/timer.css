@@ -45,6 +45,10 @@
   cursor: pointer;
 }
 
+.button:focus {
+  outline: 3px solid #f87171;
+}
+
 .button .primary {
   fill: #c53030;
   transition: fill 300ms ease-in-out;
@@ -157,6 +161,10 @@
   margin: 1rem 0.5rem;
   cursor: pointer;
   transition: background-color 300ms ease;
+}
+
+.shortcut-btn:focus {
+  outline: 3px solid #f87171;
 }
 
 .shortcut-btn:hover {

@@ -6,3 +6,7 @@
 .Footer__link {
   margin: 0.5rem;
 }
+
+.Footer__link a:focus {
+  outline: 3px solid #f87171;
+}

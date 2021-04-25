@@ -7,7 +7,7 @@ const Footer = () => (
       Déanta le <a href="https://github.com/GK-Hynes">Gerard Hynes</a>
     </span>
     <span className="Footer__link">
-      Íocóin le{" "}
+      Lógó le{" "}
       <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
         Freepik
       </a>
