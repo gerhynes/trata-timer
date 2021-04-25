@@ -1,3 +1,69 @@
+/* Global Styles */
+:root {
+  --red-100: #fee2e2;
+  --red-200: #fecaca;
+  --red-300: #fca5a5;
+  --red-400: #f87171;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-800: #991b1b;
+  --red-900: #7f1d1d;
+  --gray-300: #d1d5db;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: #fff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+/* Header Styles */
+.Header {
+  background: #fff;
+  text-align: center;
+  margin-bottom: 1.45rem;
+}
+
+.Header__title {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.5rem 1rem;
+  font-size: 2.5rem;
+  color: var(--red-600);
+}
+
+.logo {
+  width: 2rem;
+  fill: #c53030;
+  margin-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .Header {
+    text-align: left;
+  }
+}
+
+/* Timer Styles */
+
 .container {
   width: 100%;
   height: 100%;
@@ -9,9 +75,6 @@
   width: 100%;
   max-width: 475px;
   background: #fff;
-  border-radius: 0.25rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,20 +109,12 @@
 }
 
 .button:focus {
-  outline: 3px solid #f87171;
+  outline: 3px solid var(--red-400);
 }
 
 .button .primary {
-  fill: #c53030;
+  fill: var(--red-600);
   transition: fill 300ms ease-in-out;
-}
-
-.button:hover .primary {
-  fill: #9b2c2c;
-}
-
-.button .secondary {
-  fill: #fff;
 }
 
 .icon {
@@ -82,7 +137,7 @@
 }
 
 .icon:active::after {
-  background: #c53030;
+  background: var(--red-600);
   z-index: 1;
   animation: pulse 1000ms forwards;
 }
@@ -121,10 +176,6 @@
   text-align: center;
 }
 
-.icon-reset .secondary {
-  fill: #c53030;
-}
-
 .display-container {
   position: relative;
   margin-top: 1rem;
@@ -152,7 +203,7 @@
 
 .shortcut-btn {
   display: block;
-  background: #c53030;
+  background: var(--red-600);
   color: #fff;
   border: none;
   font-weight: 600;
@@ -164,20 +215,34 @@
 }
 
 .shortcut-btn:focus {
-  outline: 3px solid #f87171;
+  outline: 3px solid var(--red-400);
 }
 
 .shortcut-btn:hover {
-  background: #9b2c2c;
+  background: var(--red-700);
 }
 
 .divider {
   width: 90%;
-  color: #f4f4f4;
+  color: var(--gray-300);
 }
 
 .completedSessions {
   background: #fff;
   width: 90%;
   padding: 1rem 0;
+}
+
+/* Footer Styles */
+.Footer {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.Footer__link {
+  margin: 0.5rem;
+}
+
+.Footer__link a:focus {
+  outline: 3px solid #f87171;
 }

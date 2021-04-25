@@ -3,7 +3,6 @@ import LengthControls from "./lengthControls";
 import TimerControls from "./timerControls";
 import Display from "./display";
 import ProgressCircle from "./progressCircle";
-import "./timer.css";
 import Alarm from "../audio/Alarm.mp3";
 
 export default function Timer() {

@@ -21,7 +21,7 @@ export default function TimerControls({
               class="icon-pause"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="#c53030"
+              stroke="var(--red-600)"
             >
               <path
                 stroke-linecap="round"
@@ -36,7 +36,7 @@ export default function TimerControls({
               className="icon-play"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="#c53030"
+              stroke="var(--red-600)"
             >
               <path
                 stroke-linecap="round"
@@ -66,7 +66,7 @@ export default function TimerControls({
             className="icon-reset"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="#c53030"
+            stroke="var(--red-600)"
           >
             <path
               strokeLinecap="round"
