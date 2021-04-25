@@ -18,25 +18,37 @@ export default function TimerControls({
           {timerIsRunning ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              class="icon-pause"
+              fill="none"
               viewBox="0 0 24 24"
-              className="icon-pause"
+              stroke="#c53030"
             >
-              <circle cx="12" cy="12" r="10" className="primary" />
               <path
-                className="secondary"
-                d="M9 8h1a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1zm5 0h1a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
               className="icon-play"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="#c53030"
             >
-              <circle cx="12" cy="12" r="10" className="primary" />
               <path
-                className="secondary"
-                d="M15.51 11.14a1 1 0 0 1 0 1.72l-5 3A1 1 0 0 1 9 15V9a1 1 0 0 1 1.51-.86l5 3z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
           )}
@@ -51,16 +63,16 @@ export default function TimerControls({
         <div className="icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
+            className="icon-reset"
+            fill="none"
             viewBox="0 0 24 24"
-            className="icon-history"
+            stroke="#c53030"
           >
             <path
-              className="primary"
-              d="M6.55 6.14l1.16 1.15A1 1 0 0 1 7 9H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1.7-.7l1.44 1.42A10 10 0 1 1 2 12a1 1 0 0 1 2 0 8 8 0 1 0 2.55-5.86z"
-            />
-            <path
-              className="secondary"
-              d="M15.7 14.3a1 1 0 0 1-1.4 1.4l-3-3a1 1 0 0 1-.3-.7V7a1 1 0 0 1 2 0v4.59l2.7 2.7z"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
             />
           </svg>
         </div>
