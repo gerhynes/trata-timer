@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useIntl } from "gatsby-plugin-intl";
 import LengthControls from "./lengthControls";
 import TimerControls from "./timerControls";
 import Display from "./display";
@@ -6,6 +7,8 @@ import ProgressCircle from "./progressCircle";
 import Alarm from "../audio/Alarm.mp3";
 
 export default function Timer() {
+  const intl = useIntl();
+
   const [sessionLength, setSessionLength] = useState(25);
   const [breakLength, setBreakLength] = useState(5);
   const [timeLeft, setTimeLeft] = useState(1500);
@@ -139,13 +142,13 @@ export default function Timer() {
       <div className="Timer">
         <div className="shortcuts">
           <button className="shortcut-btn" onClick={startSession}>
-            Seisiún
+            {intl.formatMessage({ id: "session" })}
           </button>
           <button className="shortcut-btn" onClick={startShortBreak}>
-            Sos Beag
+            {intl.formatMessage({ id: "shortBreak" })}
           </button>
           <button className="shortcut-btn" onClick={startLongBreak}>
-            Sos Mór
+            {intl.formatMessage({ id: "longBreak" })}
           </button>
         </div>
         <div className="display-container">
@@ -186,7 +189,10 @@ export default function Timer() {
         <audio src={Alarm} id="beep" ref={alarm}></audio>
         <hr className="divider" />
         <div className="completedSessions">
-          <h3>Seisiúin déanta: {completedSessions}</h3>
+          <h3>
+            {intl.formatMessage({ id: "completedSessions" })}:{" "}
+            {completedSessions}
+          </h3>
         </div>
       </div>
     </div>

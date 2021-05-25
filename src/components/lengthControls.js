@@ -1,4 +1,5 @@
 import React from "react";
+import { useIntl } from "gatsby-plugin-intl";
 
 export default function LengthControls({
   count,
@@ -7,10 +8,13 @@ export default function LengthControls({
   handleDecrement,
 }) {
   const id = title.toLowerCase();
+  const intl = useIntl();
   return (
     <div className="length-controls">
       <h3 className="length-label" id={`${id}-label`}>
-        Fad an {title === "Session" ? "tSeisiúin" : "tSosa"}
+        {title === "Session"
+          ? intl.formatMessage({ id: "sessionLength" })
+          : intl.formatMessage({ id: "breakLength" })}
       </h3>
       <div className="controls-inner">
         <button

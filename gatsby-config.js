@@ -7,6 +7,19 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-plugin-intl`,
+      options: {
+        // language JSON resource path
+        path: `${__dirname}/src/intl`,
+        // supported language
+        languages: [`en`, `ga`],
+        // language file path
+        defaultLanguage: `ga`,
+        // option to redirect to `/ga` when connecting `/`
+        redirect: true,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
