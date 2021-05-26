@@ -8,29 +8,19 @@ const languageName = {
 
 const Language = () => {
   return (
-    <div>
+    <div className="Language">
       <IntlContextConsumer>
         {({ languages, language: currentLocale }) =>
           languages.map(language => (
-            <a
+            <button
               key={language}
+              className={`Language__button ${
+                currentLocale === language ? "current" : ""
+              }`}
               onClick={() => changeLocale(language)}
-              style={{
-                color: currentLocale === language ? `#fff` : `var(--red-700)`,
-                backgroundColor:
-                  currentLocale === language
-                    ? `var(--red-700)`
-                    : `var(--red-100)`,
-                fontWeight: 600,
-                margin: `1rem 0.5rem`,
-                padding: `0.25rem 0.5rem`,
-                borderRadius: `1rem`,
-                textDecoration: `none`,
-                cursor: `pointer`,
-              }}
             >
               {languageName[language]}
-            </a>
+            </button>
           ))
         }
       </IntlContextConsumer>
