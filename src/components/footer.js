@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="Footer">
       <span className="Footer__link">
         {intl.formatMessage({ id: "madeBy" })}{" "}
-        <a href="https://github.com/GK-Hynes">Gerard Hynes</a>
+        <a href="https://github.com/gerhynes">Gerard Hynes</a>
       </span>
       <span className="Footer__link">
         {intl.formatMessage({ id: "logoBy" })}{" "}
